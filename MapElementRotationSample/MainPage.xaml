@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="MapElementRotationSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapElementRotationSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel VerticalAlignment="Center">
+            <Maps:MapControl
+            Width="500"
+            Height="500"
+            x:Name="myMap"            
+            ZoomInteractionMode="GestureAndControl"
+            TiltInteractionMode="GestureAndControl"   
+            MapServiceToken="RJRqnypOQjjYoi6JxDOU~ObLGsO4GuIpqfRBu-7U5_A~AiqxkstUMp1CBfdrCfIX-B9UAha0CJ2hM3--ZVXOdW2j8-l6bG40Po_wL5gWNQgo">
+                <Maps:MapItemsControl x:Name="mapItems">
+                    <Maps:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Source="{Binding ImageSourceUri}" 
+                                       Maps:MapControl.Location="{Binding Location}">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="{Binding Rotate.Angle}"
+                                                             CenterX="{Binding Rotate.CenterX}"
+                                                             CenterY="{Binding Rotate.CenterY}"/>
+                                            <TranslateTransform X="{Binding Translate.X}"
+                                                                Y="{Binding Translate.Y}"/>
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Maps:MapItemsControl.ItemTemplate>
+                </Maps:MapItemsControl>
+            </Maps:MapControl>
+            <Button Name="myAdd" Click="myAdd_Click">Click Me to Add Element</Button>
+            <Button Name="btnRotate" Click="btnRotate_Click">Click Me to Rotate Element</Button>
+        </StackPanel>
+    </Grid>
+</Page>
